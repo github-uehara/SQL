@@ -1,0 +1,36 @@
+### 年月日
+```
+SET
+    @start_date = '2023/01/01'; 
+
+WITH daytable AS ( 
+    SELECT
+        @seq_day := @start_day AS seq_day 
+    UNION 
+    SELECT
+        @seq_day := DATE_ADD(@seq_day, INTERVAL 1 DAY) AS days 
+    FROM
+        information_schema.COLUMNS 
+    LIMIT
+        10
+) 
+SELECT
+    * 
+FROM
+    daytable;
+
++------------+
+| seq_day    |
++------------+
+| 2023/01/01 |
+| 2023-01-02 |
+| 2023-01-03 |
+| 2023-01-04 |
+| 2023-01-05 |
+| 2023-01-06 |
+| 2023-01-07 |
+| 2023-01-08 |
+| 2023-01-09 |
+| 2023-01-10 |
++------------+
+```
